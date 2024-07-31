@@ -1,0 +1,28 @@
+{% load static %}
+<nav class="navbar navbar-light bg-primary navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+            <img src="{% static 'img/logo.png' %}" alt="Logo" width="40" height="40" class="d-inline-block align-text-bottom">
+            <span class="navbar-text" style="font-family: Lucida Handwriting Std Black; font-size:larger; margin-left: 5px;">
+                logium
+            </span>
+        </a>
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+                <a href="{% url 'blogs' %}" class="nav-link">Blogs</a>
+            </li>
+        </ul>
+        <div class="dropdown">
+            <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="https://github.com/mdo.png" alt="mdo" width="34" height="34" class="rounded-circle">
+            </a>
+            <ul class="dropdown-menu text-small">
+              <li><a class="dropdown-item" href="{% url 'addblog' %}">New project...</a></li>  <!--{% url 'blogs' %} -->
+              <li><a class="dropdown-item" href="{% url 'settings' %}">Settings</a></li>
+              <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Sign out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
