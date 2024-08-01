@@ -1,8 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django_ckeditor_5.fields import CKEditor5Field
-
-
+from django.contrib.auth.models import User
 
 
 class Category(models.Model):
@@ -24,6 +23,7 @@ class Blog(models.Model):
     published_date= models.DateField(auto_now_add=True)
     slug = models.SlugField(unique=True, blank=True, db_index=True, editable=False) # bu SEO açısından iyidir.  id yerine kursun tam adı ile url oluşturur.
     categories =models.ManyToManyField(Category, blank=True)
+    author = models.ForeignKey(User, null=False, default=1, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         if not self.slug:

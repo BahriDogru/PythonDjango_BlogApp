@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+{% block css_files %}  
+    <link rel="stylesheet" href="{% static 'account/design/register.css' %}">
+{% endblock %}
+
+<div class="container mt-4">
+  <div class="col">
+      
+      {% if error %}
+          <div class="alert alert-danger">
+              {{error}}
+          </div>
+      {% endif %}
+
+      <form action="{% url 'register' %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+              <div class="mb-3">
+                  <label for="username" class="form-label">Username</label>
+                  <input type="text" class="form-control" name="username" value="{{username}}">
+              </div>
+              <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" name="email" value="{{email}}">
+              </div>
+              <div class="row">
+                  <div class="col">
+                      <div class="mb-3">
+                          <label for="firstname" class="form-label">First Name</label>
+                          <input type="text" class="form-control" name="firstname" value="{{firstname}}">
+                      </div>
+                  </div>
+                  <div class="col">
+                      <div class="mb-3">
+                          <label for="lastname" class="form-label">Last Name</label>
+                          <input type="text" class="form-control" name="lastname" value="{{lastname}}">
+                      </div>
+                  </div>                 
+              </div>
+
+              <div class="row">
+
+                  <div class="col">
+                      <div class="mb-3">
+                          <label for="password" class="form-label">Password</label>
+                          <input type="password" class="form-control" name="password">
+                      </div>
+                  </div>
+                  <div class="col">
+                      <div class="mb-3">
+                          <label for="repassword" class="form-label">Re-password</label>
+                          <input type="password" class="form-control" name="repassword">
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="picture" class="form-label">Profile Picture</label>
+                        <input type="file" name="picture" id="" required>
+                    </div>
+                </div>
+              </div>
+              <div class="mb-3"></div>
+              <input type="submit" value="Register" class="btn btn-primary">
+
+      </form>
+
+  </div>
+</div>
+{% endblock %}

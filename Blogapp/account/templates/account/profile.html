@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card text-center">
+        <div class="card-header">
+        Profile
+        </div>
+        <div class="card-body">
+            {% if image and image.avatar %}
+                <img src="{{ image.avatar.url }}" class="rounded mx-auto d-block" style="width: 20%; height: 20%;">
+            {% else %}
+                <img src="{% static 'user.png' %}" class="rounded mx-auto d-block" style="width: 20%; height: 20%;">
+            {% endif %}
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Username:</strong> {{ user.username }}</li>
+                <li class="list-group-item"><strong>Name:</strong> {{ user.first_name }}</li>
+                <li class="list-group-item"><strong>Surname:</strong> {{ user.last_name }}</li>
+                <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+            </ul>
+            <hr>
+            <a href="{% url 'updateprofile' %}" class="btn btn-secondary">Update Profile</a>
+        </div>
+        <div class="card-footer text-body-secondary">
+        2 days ago
+        </div>
+    </div>
+</div>
+{% endblock %}

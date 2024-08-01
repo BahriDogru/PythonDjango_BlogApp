@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+{% block css_files %}  
+    <link rel="stylesheet" href="{% static 'account/register.css' %}">
+{% endblock %}
+<h1>updateprofile</h1>
+
+<div class="container mt-4">
+  <div class="col">
+      
+      {% if error %}
+          <div class="alert alert-danger">
+              {{error}}
+          </div>
+      {% endif %}
+
+      <form action="" method="POST">
+          {% csrf_token %}
+              <div class="mb-3">
+                  <label for="username" class="form-label">Username<strong> <em style="color: red;">Do not change!</em></strong></label>
+                  <input type="text" class="form-control" name="username"  placeholder="{{user.username}}">
+              </div>
+              <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" name="email" value="{{user.email}}">
+              </div>
+              <div class="row">
+                  <div class="col">
+                      <div class="mb-3">
+                          <label for="firstname" class="form-label">First Name</label>
+                          <input type="text" class="form-control" name="firstname" value="{{user.first_name}}">
+                      </div>
+                  </div>
+                  <div class="col">
+                      <div class="mb-3">
+                          <label for="lastname" class="form-label">Last Name</label>
+                          <input type="text" class="form-control" name="lastname" value="{{user.last_name}}">
+                      </div>
+                  </div>                 
+              </div>
+              <div class="mb-3"></div>
+              <input type="submit" value="Update" class="btn btn-primary">
+
+      </form>
+
+  </div>
+</div>
+{% endblock %}

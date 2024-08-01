@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from .models import  Blog, Category
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+
 
 
 # Create your views here.
@@ -16,19 +19,14 @@ def blogs(request):
         "categories": Category.objects.all()
     })
 
-def profile(request):
-    return render(request,'blog/profile.html')
-
-def settings(request):
-    return render(request,'blog/settings.html')
-
 def addblog(request):
     if request.method =="POST":
         title = request.POST["title"]
         story = request.POST["story"]
         image = request.FILES["image"]
         categories = request.POST.getlist("categories")
-        blog = Blog.objects.create(title=title, story=story, image=image)
+        author = request.user
+        blog = Blog.objects.create(title=title, story=story, image=image, author=author)
         blog.save()
         
         for category_id in categories:
@@ -52,6 +50,7 @@ def blog_details(request, slug):
 def blogs_by_category(request, slug):
     context={
         "blogs": Blog.objects.filter(categories__slug=slug),
-        "categories": Category.objects.all()
+        "categories": Category.objects.all(),
+        "selected_category" : slug
     }
     return render(request,'blog/blogs.html',context)

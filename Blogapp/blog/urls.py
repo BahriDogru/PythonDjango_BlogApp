@@ -7,7 +7,5 @@ urlpatterns = [
     path('blogs/<slug:slug>', views.blog_details, name="blog_details"),
     path('category/<slug:slug>', views.blogs_by_category, name="blogs_by_category"),
     path('addblog', views.addblog, name="addblog"),
-    path('profile', views.profile, name="profile"),
-    path('settings', views.settings, name="settings"),
     # path('uploads/', views.uploads, name='uploads'),    
 ]
