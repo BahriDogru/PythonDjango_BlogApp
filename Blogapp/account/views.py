@@ -30,6 +30,7 @@ def register_request(request):
         lastname= request.POST["lastname"]
         password= request.POST["password"]
         repassword= request.POST["repassword"]
+        picture = request.FILES["picture"]
 
         if password == repassword:
             if User.objects.filter(username=username).exists():
@@ -52,6 +53,7 @@ def register_request(request):
                 else:
                     user = User.objects.create_user(username=username, email=email, first_name=firstname,last_name=lastname,password=password)
                     user.save()
+                    UserProfile.objects.create(user=user, avatar=picture)
                     return redirect("login")
 
         else:
@@ -82,17 +84,21 @@ def profile(request):
 def settings(request):
     if User.is_authenticated:
         user = request.user
+        user_profile = UserProfile.objects.get(user=request.user)
         context={
                "users":request.user,
-               "blogs" : Blog.objects.filter(author__username=user)
+               "blogs" : Blog.objects.filter(author__username=user),
+               "image":user_profile
             }
 
     return render(request,'account/settings.html', context)
 
 def updateprofile(request):
     if User.is_authenticated:
+        user_profile = UserProfile.objects.get(user=request.user)
         context={
-               "users":request.user
+               "image":user_profile,
+               "users":request.user,
             }
     if request.method =="POST":
         email= request.POST["email"]

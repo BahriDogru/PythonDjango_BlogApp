@@ -6,4 +6,4 @@ class UserProfile(models.Model):
     avatar = models.ImageField(upload_to="accountPP", null=True, blank=True) # or whatever
 
     def __str__(self):
-        return self.user.email
+        return f"{self.user.first_name} {self.user.last_name}"
