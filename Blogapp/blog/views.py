@@ -2,9 +2,9 @@ from django.shortcuts import render
 from .models import  Blog, Category
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.contrib import messages
 from account.models import UserProfile
-
+from datetime import date
 
 
 
@@ -16,13 +16,13 @@ def home(request):
         except UserProfile.DoesNotExist:
             user_profile = UserProfile.objects.create(user=request.user)
         return render(request,'blog/index.html',{
-            "blogs": Blog.objects.all(),
+            "blogs": Blog.objects.filter(published_date=date.today()),
             "categories": Category.objects.all(),
             "image": user_profile
         })
 
     return render(request,'blog/index.html',{
-        "blogs": Blog.objects.all(),
+        "blogs": Blog.objects.filter(published_date=date.today()),
         "categories": Category.objects.all()
     })
 
@@ -56,6 +56,8 @@ def addblog(request):
                 blog.categories.add(category)
 
             blog.save()
+            return redirect("home")
+            
 
         return render(request,'blog/addblog.html', {
             "categories": Category.objects.all(),

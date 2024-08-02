@@ -81,7 +81,7 @@ def profile(request):
     return render(request,'account/profile.html', context)
 
 
-def settings(request):
+def myblogs(request):
     if User.is_authenticated:
         user = request.user
         user_profile = UserProfile.objects.get(user=request.user)
@@ -91,7 +91,7 @@ def settings(request):
                "image":user_profile
             }
 
-    return render(request,'account/settings.html', context)
+    return render(request,'account/myblogs.html', context)
 
 def updateprofile(request):
     if User.is_authenticated:

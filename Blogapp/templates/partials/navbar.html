@@ -24,18 +24,16 @@
             {% endif %}
             <ul class="dropdown-menu text-small">
                 {% if user.is_authenticated %}
-                <li><a class="dropdown-item" href="{% url 'addblog' %}">New project...</a></li>  <!--{% url 'blogs' %} -->
-                <li><a class="dropdown-item" href="{% url 'settings' %}">Settings</a></li>
+                <li><a class="dropdown-item" href="{% url 'addblog' %}">New story</a></li>  <!--{% url 'blogs' %} -->
+                <li><a class="dropdown-item" href="{% url 'myblogs' %}">My Blogs</a></li>
                 <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
-                <li><a class="dropdown-item" href="{% url 'updateprofile' %}">updateprofile</a></li>
-
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                 {% else %}
                 <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+                <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="{% url 'register' %}">Sign in</a></li>
                 {% endif %}
-             
             </ul>
         </div>
     </div>
